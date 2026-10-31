@@ -1,0 +1,66 @@
+---
+layout: runbook
+title: '#4471 split · three problems, three fixes'
+owner: MatthieuVeillon
+status: open
+reviewed: 2026-10-31
+signature: MatthieuVeillon
+---
+
+<script>
+  import ProblemTable from '#lib/kb/ProblemTable.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+
+  const repo = 'https://github.com/MatthieuVeillon/mega-s01e03/issues';
+  const tickets = { parser: `${repo}/1`, hint: `${repo}/2`, 'day-shift': `${repo}/3` };
+</script>
+
+[#4471](/kb/incidents/4471) says one bug, one fix queued. Its own table already shows two causes,
+and five of its reports are not a flipped month at all. The parser fix will not close the other
+two. Each problem now has its own ticket.
+
+<Callout kind="warn">
+Not one issue. Three problems, three fixes. Fixing the parser leaves the other two open.
+</Callout>
+
+## The three problems
+
+<ProblemTable ticket={4471} {tickets} />
+
+### `parser`: the shared parser reads every date month first
+
+A day-first tenant books 7 April (`07/04`); the invite says 4 July. Day and month swap, every time,
+on every channel except booking-v3's form. This is the bug #4471 describes, and the queued fix is
+for this one only.
+
+### `hint`: booking-v3's form tells people to type the month first
+
+booking-v3 prints `MM/DD/YYYY` under its date field. Day-first tenants on that form (Alder Physio,
+Copper Studio, Pale Harbour) type what the hint says, and the form reads it day first. Same flip
+for the reporter, different code: the parser fix does not touch it. Fix the hint, or read the
+field the way the hint says.
+
+### `day-shift`: the date moves by one day, nothing is flipped
+
+"Tuesday 12 May" on the invite, "Monday 11 May" in the calendar. One meeting on Tuesday in Lisbon
+and Monday in Toronto. An invite that arrives before its booking. The desk noted these five as a
+one-day move, then filed them under `parser` by tenant. A swap of day and month cannot move a date
+by one day; this looks like a time zone conversion at midnight (not confirmed in the code).
+
+## How to tell them apart
+
+- Day and month swapped, booked through booking-v3's form at a day-first tenant: `hint`.
+- Day and month swapped, any other way in: `parser`.
+- Off by one day, no swap: `day-shift`.
+
+Subject lines do not tell them apart: all three arrive as "Date is wrong". Intake's tag does not
+either: it guesses from the reporter's browser, not from the tenant's form.
+
+## What changes for the desk
+
+- [#4471](/kb/incidents/4471) stays as it was; this page is where its reports go now.
+- Merging on subject alone ([decision 0001](/kb/decisions/0001-dedupe-by-subject)) put all three
+  into one ticket. A new decision record should replace 0001, not an edit.
+
+<RenderStamp {signature} />
