@@ -16,4 +16,4 @@ Swapping day and month cannot move a date by one day. The desk noted these five 
 
 Likely cause, not confirmed in the code: a date converted across time zones at midnight (Lisbon vs Toronto).
 
-Counted by `src/lib/kb/problems.ts`. Page: `src/routes/kb/incidents/4471/split/+page.svx`.
+Counted by `src/lib/kb/ProblemTable.svelte` with the desk's own functions (`causes.ts`). Page: `src/routes/kb/incidents/4471/split/+page.svx`.

@@ -1,6 +1,6 @@
 ---
 layout: runbook
-title: '#4471 split · three problems, three fixes'
+title: '#4471 split · three problems, one still open'
 owner: MatthieuVeillon
 status: open
 reviewed: 2026-10-31
@@ -13,40 +13,43 @@ signature: MatthieuVeillon
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
 
   const repo = 'https://github.com/MatthieuVeillon/mega-s01e03/issues';
-  const tickets = { parser: `${repo}/1`, hint: `${repo}/2`, 'day-shift': `${repo}/3` };
+  const tickets = {
+    parser: { url: `${repo}/1`, state: 'fixed' },
+    hint: { url: `${repo}/2`, state: "won't fix" },
+    'day-shift': { url: `${repo}/3`, state: 'open' },
+  };
 </script>
 
-[#4471](/kb/incidents/4471) says one bug, one fix queued. Its own table already shows two causes,
-and five of its reports are not a flipped month at all. The parser fix will not close the other
-two. Each problem now has its own ticket.
+[#4471](/kb/incidents/4471) was merged as one bug and closed on 5 October. It held three
+problems. Engineering fixed the parser and retired booking-v3's form. Nothing has touched the
+third: the five dates that move by one day.
 
 <Callout kind="warn">
-Not one issue. Three problems, three fixes. Fixing the parser leaves the other two open.
+#4471 is closed, and one of its problems is still open: the date moves by one day (day-shift).
 </Callout>
 
 ## The three problems
 
 <ProblemTable ticket={4471} {tickets} />
 
-### `parser`: the shared parser reads every date month first
+### `parser`: the shared parser read every date month first · fixed
 
-A day-first tenant books 7 April (`07/04`); the invite says 4 July. Day and month swap, every time,
-on every channel except booking-v3's form. This is the bug #4471 describes, and the queued fix is
-for this one only.
+A day-first tenant books 7 April (`07/04`); the invite says 4 July. Day and month swap, on every
+channel except booking-v3's form. Fixed by `fix(dates): parse dd/mm for eu locales`.
 
-### `hint`: booking-v3's form tells people to type the month first
+### `hint`: booking-v3's form told people to type the month first · won't fix
 
 booking-v3 prints `MM/DD/YYYY` under its date field. Day-first tenants on that form (Alder Physio,
-Copper Studio, Pale Harbour) type what the hint says, and the form reads it day first. Same flip
-for the reporter, different code: the parser fix does not touch it. Fix the hint, or read the
-field the way the hint says.
+Copper Studio, Pale Harbour) typed what the hint said, and the form read it day first. Same flip
+for the reporter, different code: the parser fix does not touch it. Won't fix: the form is retired.
 
-### `day-shift`: the date moves by one day, nothing is flipped
+### `day-shift`: the date moves by one day, nothing is flipped · open
 
 "Tuesday 12 May" on the invite, "Monday 11 May" in the calendar. One meeting on Tuesday in Lisbon
 and Monday in Toronto. An invite that arrives before its booking. The desk noted these five as a
-one-day move, then filed them under `parser` by tenant. A swap of day and month cannot move a date
-by one day; this looks like a time zone conversion at midnight (not confirmed in the code).
+one-day move and filed them under `parser` by tenant, so they were closed with it. A swap of day
+and month cannot move a date by one day, so the parser fix cannot close them. This looks like a
+time zone conversion at midnight (not confirmed in the code).
 
 ## How to tell them apart
 
@@ -59,7 +62,8 @@ either: it guesses from the reporter's browser, not from the tenant's form.
 
 ## What changes for the desk
 
-- [#4471](/kb/incidents/4471) stays as it was; this page is where its reports go now.
+- A new one-day report goes to [#3](https://github.com/MatthieuVeillon/mega-s01e03/issues/3), not
+  to #4471.
 - Merging on subject alone ([decision 0001](/kb/decisions/0001-dedupe-by-subject)) put all three
   into one ticket. A new decision record should replace 0001, not an edit.
 

@@ -16,4 +16,4 @@ Fix: make the hint match how the field is read (or read the field the way the hi
 
 All 33 give both dates, and day and month are exactly swapped. Intake's tag splits them 18 `hint` / 15 `parser`, because it guesses from the reporter's browser; the cause depends on the tenant's form.
 
-Counted by `src/lib/kb/problems.ts`. Page: `src/routes/kb/incidents/4471/split/+page.svx`.
+Counted by `src/lib/kb/ProblemTable.svelte` with the desk's own functions (`causes.ts`). Page: `src/routes/kb/incidents/4471/split/+page.svx`.

@@ -20,4 +20,4 @@ This is the bug desk ticket 4471 describes, and the fix queued there is for this
 
 Of the 374 that are not one-day moves: in 370 both dates are given, and day and month are exactly swapped. The other 4 give no dates ("sent my mother to the dentist on the wrong day", "Our October bookings came through for January", a request for a day-first setting, "telling clients the date in words") and are placed by tenant, like `causes.ts` does.
 
-Counted by `src/lib/kb/problems.ts` from `src/lib/data/reports-4471.json` (427 rows, 412 unique ids). Page: `src/routes/kb/incidents/4471/split/+page.svx`.
+Counted by `src/lib/kb/ProblemTable.svelte` with the desk's own functions (`causes.ts`) from `src/lib/data/reports-4471.json` (427 rows, 412 unique ids). Page: `src/routes/kb/incidents/4471/split/+page.svx`.

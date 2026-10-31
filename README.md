@@ -39,13 +39,13 @@ Exported 2026-10-04 from the `support` repo, `apps/kb/` → `src/`.
 
 Desk ticket 4471 holds 412 reports and says one bug. It holds three problems:
 
-| problem | reports | ticket |
-| --- | --- | --- |
-| `parser`: the shared parser reads dates month first | 379 (5 of them are #3) | [#1](https://github.com/MatthieuVeillon/mega-s01e03/issues/1) |
-| `hint`: booking-v3's form tells people to type the month first | 33 | [#2](https://github.com/MatthieuVeillon/mega-s01e03/issues/2) |
-| `day-shift`: the date moves by one day, nothing swapped | 5 | [#3](https://github.com/MatthieuVeillon/mega-s01e03/issues/3) |
+| problem | reports | ticket | state |
+| --- | --- | --- | --- |
+| `parser`: the shared parser reads dates month first | 379 (5 of them are #3) | [#1](https://github.com/MatthieuVeillon/mega-s01e03/issues/1) | fixed |
+| `hint`: booking-v3's form tells people to type the month first | 33 | [#2](https://github.com/MatthieuVeillon/mega-s01e03/issues/2) | won't fix (form retired) |
+| `day-shift`: the date moves by one day, nothing swapped | 5 | [#3](https://github.com/MatthieuVeillon/mega-s01e03/issues/3) | open |
 
 - The page: `src/routes/kb/incidents/4471/split/+page.svx` (signed, desk ref `DR-83YG-60R7`).
 - The page as the desk sees it: `rendered/4471-split.html` (built), `rendered/4471-split.jpg` (screenshot).
-- The counts: `src/lib/kb/problems.ts`, shown by `src/lib/kb/ProblemTable.svelte`. Nothing else in `src/` changed.
+- The counts: `src/lib/kb/ProblemTable.svelte`, with the desk's own functions (`causes.ts`). Nothing else in `src/` changed.
 - Build: `npm install && npm run build`, then open `build/kb/incidents/4471/split/index.html`.
