@@ -45,7 +45,7 @@ Desk ticket 4471 holds 412 reports and says one bug. It holds three problems:
 | `hint`: booking-v3's form tells people to type the month first | 33 | [#2](https://github.com/MatthieuVeillon/mega-s01e03/issues/2) | won't fix (form retired) |
 | `day-shift`: the date moves by one day, nothing swapped | 5 | [#3](https://github.com/MatthieuVeillon/mega-s01e03/issues/3) | open |
 
-- The page: `src/routes/kb/incidents/4471/split/+page.svx` (signed, desk ref `DR-83YG-60R7`).
-- The page as the desk sees it: `rendered/4471-split.html` (built), `rendered/4471-split.jpg` (screenshot).
+- The page: `src/routes/kb/incidents/4471/split/+page.svx` (signed with the course ticket, desk ref `DR-GJHX-KE14`).
+- The page as the desk sees it: `rendered/4471-split.html` (built, self-contained).
 - The counts: `src/lib/kb/ProblemTable.svelte`, with the desk's own functions (`causes.ts`). Nothing else in `src/` changed.
 - Build: `npm install && npm run build`, then open `build/kb/incidents/4471/split/index.html`.
