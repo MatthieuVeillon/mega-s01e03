@@ -41,7 +41,7 @@ Desk ticket 4471 holds 412 reports and says one bug. It holds three problems:
 
 | problem | reports | ticket |
 | --- | --- | --- |
-| `parser`: the shared parser reads dates month first | 374 | [#1](https://github.com/MatthieuVeillon/mega-s01e03/issues/1) |
+| `parser`: the shared parser reads dates month first | 379 (5 of them are #3) | [#1](https://github.com/MatthieuVeillon/mega-s01e03/issues/1) |
 | `hint`: booking-v3's form tells people to type the month first | 33 | [#2](https://github.com/MatthieuVeillon/mega-s01e03/issues/2) |
 | `day-shift`: the date moves by one day, nothing swapped | 5 | [#3](https://github.com/MatthieuVeillon/mega-s01e03/issues/3) |
 
